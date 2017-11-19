@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-unobtrusive",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description":
     "ESLint config that only helps you, and otherwise stays out of your way",
   "main": "index.js",
@@ -11,7 +11,7 @@
   "peerDependencies": {
     "eslint": ">=4.0.0"
   },
-  "optionalDependencies": {
+  "// optionalPeerDependencies (the versions you should get if you use the relevant extras)": {
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-react": "^7.5.0"
   }
