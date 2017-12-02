@@ -1,5 +1,3 @@
-// import { line } from "../../Library/Caches/typescript/2.6/node_modules/"react/jsx-types/figures";": "off",
-
 module.exports = {
   parserOptions: {
     ecmaFeatures: {
