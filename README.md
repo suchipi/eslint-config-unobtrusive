@@ -15,6 +15,7 @@ I wanted an ESLint config that would stay silent most of the time, but when it s
 ## Goals
 
 `unobtrusive` was made with the following goals in mind:
+
 * Stay out of the user's way, but still offer help.
 * Don't flag anything based on arbitrary consistency, stylistic choices, or premature optimization.
 * Help the user find unfinished or unused code while they type.
@@ -26,6 +27,7 @@ I wanted an ESLint config that would stay silent most of the time, but when it s
 ## Assumptions
 
 This config assumes the following:
+
 * You are using ECMAScript modules in your codebase.
 * Since you are using modules, your code is implcitly in strict mode.
 * You aren't using nonstandard globals very often, but when you do, you define them in your eslint config.
@@ -34,6 +36,7 @@ This config assumes the following:
 ## Rationale
 
 These are the criteria I used to decide which rules to include:
+
 * Disable all formatting rules (such as [`indent`](https://eslint.org/docs/rules/indent)).
   * ESLint can't standardize code style perfectly; lots of variations can still slip through the cracks. Use a code formatter (like [prettier](https://prettier.io/)) or style guide (like [standard](https://standardjs.com/)) instead.
 * Disable rules that require the user to change their code where doing so will not result in a change in runtime behavior (such as [`yoda`](https://eslint.org/docs/rules/yoda), [`curly`](https://eslint.org/docs/rules/curly), and [`dot-notation`](https://eslint.org/docs/rules/dot-notation)).
@@ -55,6 +58,7 @@ Also, in the config itself (`index.js`), each rule has a comment above it explai
 ## Installation
 
 1. Install the package
+
    ```
    $ npm install eslint-config-unobtrusive
    ```
@@ -62,6 +66,7 @@ Also, in the config itself (`index.js`), each rule has a comment above it explai
 2. Add it to your eslint config:
 
    `.eslintrc`
+
    ```json
    {
      "extends": "unobtrusive",
@@ -78,6 +83,7 @@ Also, in the config itself (`index.js`), each rule has a comment above it explai
 The [`env`](https://eslint.org/docs/user-guide/configuring#specifying-environments) config option is required, because eslint-config-unobtrusive includes the [`no-undef`](https://eslint.org/docs/rules/no-undef) rule, which warns you when you access a variable that is not defined. In order to know which variables are defined, ESLint looks for variable declarations in the same file and also references a list of known globals. The [`env`](https://eslint.org/docs/user-guide/configuring#specifying-environments) config option is used to configure the list of known globals in your environment.
 
 You can also use the [`globals`](https://eslint.org/docs/user-guide/configuring#specifying-globals) option to add additional names to the list of known globals:
+
 ```json
 {
   "extends": "unobtrusive",
@@ -90,7 +96,8 @@ You can also use the [`globals`](https://eslint.org/docs/user-guide/configuring#
   }
 }
 ```
- The key/value pairs of the [`globals`](https://eslint.org/docs/user-guide/configuring#specifying-globals) option refer to the name of the global and whether it is writable (so `false` indicates that the global is read-only). 
+
+The key/value pairs of the [`globals`](https://eslint.org/docs/user-guide/configuring#specifying-globals) option refer to the name of the global and whether it is writable (so `false` indicates that the global is read-only).
 
 ## Extras
 
@@ -98,12 +105,13 @@ You can also use the [`globals`](https://eslint.org/docs/user-guide/configuring#
 
 ### `unobtrusive/import`
 
-This extra config depends on `eslint-plugin-import` and adds rules that warn you when attempting to import or require things that don't exist.
-It's not included in the base `unobtrusive` config because it would flag false positives for users relying on custom import resolution mechanics, like webpack loaders or `NODE_PATH`.
+This extra config depends on `eslint-plugin-import` and adds rules that warn you when attempting to import or require things that don't exist. It's not included in the base `unobtrusive` config because it would flag false positives for users relying on custom import resolution mechanics, like webpack loaders or `NODE_PATH`.
 
 #### Installation/Usage
+
 1. Install `unobtrusive` first
 2. Install `eslint-plugin-import`
+
    ```
    $ npm install eslint-plugin-import
    ```
@@ -111,12 +119,10 @@ It's not included in the base `unobtrusive` config because it would flag false p
 3. Add `unobtrusive/import` to your eslint config:
 
    `.eslintrc`
+
    ```json
    {
-     "extends": [
-       "unobtrusive",
-       "unobtrusive/import"
-     ],
+     "extends": ["unobtrusive", "unobtrusive/import"],
      "env": {
        "browser": true
      }
@@ -127,12 +133,13 @@ It's not included in the base `unobtrusive` config because it would flag false p
 
 ### `unobtrusive/react`
 
-This extra config depends on `eslint-plugin-react` and adds React-specific rules that are in line with the `unobtrusive` philosophy. It also configures `eslint` so that it can parse JSX properly.
-It's not included in the base `unobtrusive` config because not all users use React.
+This extra config depends on `eslint-plugin-react` and adds React-specific rules that are in line with the `unobtrusive` philosophy. It also configures `eslint` so that it can parse JSX properly, and fixes some JSX-related false positives and false negatives with `no-unused-vars` and `no-undef`. It's not included in the base `unobtrusive` config because not all users use React.
 
 #### Installation/Usage
+
 1. Install `unobtrusive` first
 2. Install `eslint-plugin-react`
+
    ```
    $ npm install eslint-plugin-react
    ```
@@ -140,12 +147,10 @@ It's not included in the base `unobtrusive` config because not all users use Rea
 3. Add `unobtrusive/react` to your eslint config:
 
    `.eslintrc`
+
    ```json
    {
-     "extends": [
-       "unobtrusive",
-       "unobtrusive/react"
-     ],
+     "extends": ["unobtrusive", "unobtrusive/react"],
      "env": {
        "browser": true
      }
@@ -154,13 +159,43 @@ It's not included in the base `unobtrusive` config because not all users use Rea
 
 4. That's it!
 
-> NOTE: To use `unobtrusive`, `unobtrusive/import`, and `unobtrusive/react` together, your eslint config would look like this:
+### `unobtrusive/flowtype`
+
+This extra config depends on `eslint-plugin-flowtype` and `babel-eslint` and adds flow-specific rules that are in line with the `unobtrusive` philosophy. It also configures `eslint` so that it can parse flow types properly, and fixes some type-related false positives and false negatives with `no-unused-vars` and `no-undef`. It's not included in the base `unobtrusive` config because not all users use flow.
+
+#### Installation/Usage
+
+1. Install `unobtrusive` first
+2. Install `eslint-plugin-flowtype` and `babel-eslint`
+
+   ```
+   $ npm install eslint-plugin-flowtype babel-eslint
+   ```
+
+3. Add `unobtrusive/flowtype` to your eslint config:
+
+   `.eslintrc`
+
+   ```json
+   {
+     "extends": ["unobtrusive", "unobtrusive/flowtype"],
+     "env": {
+       "browser": true
+     }
+   }
+   ```
+
+4. That's it!
+
+<!-- prettier-ignore -->
+> NOTE: To use `unobtrusive`, `unobtrusive/import`, `unobtrusive/react`, and `unobtrusive/flowtype` together, your eslint config would look like this:
 >```json
 >{
 >  "extends": [
 >    "unobtrusive",
 >    "unobtrusive/import",
->    "unobtrusive/react"
+>    "unobtrusive/react",
+>    "unobtrusive/flowtype"
 >  ],
 >  "env": {
 >    "browser": true
