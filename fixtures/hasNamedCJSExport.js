@@ -1,0 +1,1 @@
+exports.namedExport = 5;
