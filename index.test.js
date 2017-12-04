@@ -39,18 +39,20 @@ const getAst = (source = "", filename) => {
   });
 };
 
-const failMessage = message => {
-  throw new Error(
-    `Unexpected ${message.ruleId} at line ${message.line}, column ${
-      message.column
-    }.`
-  );
+const severities = {
+  warn: 1,
+  error: 2,
+  1: "warn",
+  2: "error"
 };
 
 const parseComment = value => {
-  const matches = value.match(/^ Expect ([\w-/, ]+)/i);
+  const matches = value.match(/^ Expect ([:\w-/, ]+)/i);
   if (matches) {
-    return matches[1].split(",").map(str => str.trim());
+    return matches[1].split(",").map(str => {
+      const [severity, ruleId] = str.trim().split(":");
+      return { severity, ruleId };
+    });
   } else {
     return [];
   }
@@ -65,7 +67,7 @@ report.results.forEach(file => {
         const expectedRules = parseComment(comment.value);
 
         if (expectedRules.length > 0) {
-          expectedRules.forEach(ruleId => {
+          expectedRules.forEach(({ severity, ruleId }) => {
             const messagesOnLine = file.messages.filter(
               message => message.line === comment.loc.start.line + 1
             );
@@ -87,6 +89,17 @@ report.results.forEach(file => {
               }
 
               throw new Error(errorMessage);
+            } else {
+              if (expectedMessage.severity !== severities[severity]) {
+                throw new Error(
+                  `Expected the ${ruleId} on line ` +
+                    `${comment.loc.start.line + 1} to be of severity ` +
+                    `${severity}, but it was of severity ` +
+                    `${severities[expectedMessage.severity]}.`
+                );
+              } else {
+                // All good
+              }
             }
           });
         }
@@ -99,10 +112,17 @@ report.results.forEach(file => {
           comment => comment.loc.start.line === message.line - 1
         );
 
+        const failMessage = message => {
+          throw new Error(
+            `Unexpected ${message.ruleId} (${severities[message.severity]}) ` +
+              `at line ${message.line}, column ${message.column}.`
+          );
+        };
+
         if (comment) {
           const expectedRules = parseComment(comment.value);
-          if (expectedRules.some(ruleId => ruleId === message.ruleId)) {
-            // No error
+          if (expectedRules.some(({ ruleId }) => ruleId === message.ruleId)) {
+            // This rule was expected, so we're good
           } else {
             failMessage(message);
           }

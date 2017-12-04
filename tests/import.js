@@ -1,8 +1,13 @@
-// Expect import/no-extraneous-dependencies, import/no-unresolved, no-unused-vars
+// Expect warn:import/no-extraneous-dependencies, error:import/no-unresolved
 import React from "react";
 
-// Expect import/named, no-unused-vars
-import { notThere } from "../fixtures/hasESDefaultExport";
+React.go();
 
-// Expect import/default, no-unused-vars
+// Expect error:import/named
+import { notThere } from "../fixtures/hasESDefaultExport";
+notThere();
+
+// Expect error:import/default
 import noDefault from "../fixtures/hasNamedESExport";
+
+noDefault();

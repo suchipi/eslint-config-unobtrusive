@@ -1,10 +1,10 @@
-// Expect import/no-extraneous-dependencies, import/no-unresolved
+// Expect warn:import/no-extraneous-dependencies, error:import/no-unresolved
 import React from "react";
 
 const Foo = () => <div />;
 
-// Expect no-unused-vars
+// Expect warn:no-unused-vars
 const bar = <Foo />;
 
-// Expect no-unused-vars, react/jsx-no-undef
+// Expect warn:no-unused-vars, error:react/jsx-no-undef
 const qux = <FooBar />;

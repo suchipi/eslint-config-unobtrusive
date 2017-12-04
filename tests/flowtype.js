@@ -1,7 +1,7 @@
-// Expect flowtype/require-valid-file-annotation
+// Expect warn:flowtype/require-valid-file-annotation
 // @floww
 
-// Expect no-unused-vars
+// Expect warn:no-unused-vars
 type Foo = number;
 
 type Bar = string;

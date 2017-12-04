@@ -2,7 +2,7 @@ module.exports = {
   // Assume the user is using ES modules, so we're always in a module context.
   parserOptions: {
     sourceType: "module",
-    ecmaVersion: 6
+    ecmaVersion: 2017
   },
 
   rules: {
@@ -71,10 +71,10 @@ module.exports = {
     // user over (and they don't hurt anything anyway).
     // "no-debugger": "off",
 
-    // This rule disallows using the same name for function parameters. Although
-    // uncommon, there are valid reasons to do this, for instance:
-    // `function(_, _, something) { /* ... */ }`.
-    // "no-dupe-args": "off",
+    // This rule disallows using the same name for function parameters. This is
+    // an error in strict mode, which we assume you are in since you're using
+    // modules. 
+    "no-dupe-args": "error",
 
     // If you have duplicate object keys in your application, the last one in
     // wins. But, this is kind of weird. Often, this rule appears when you're
