@@ -46,6 +46,14 @@ const severities = {
   2: "error"
 };
 
+/* Parses comments like:
+
+// Expect error:no-undef
+something();
+
+// Expect warn:no-unused-expressions, error:no-undef
+somethingElse;
+*/
 const parseComment = value => {
   const matches = value.match(/^ Expect ([:\w-/, ]+)/i);
   if (matches) {

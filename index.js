@@ -552,12 +552,8 @@ module.exports = {
     // the 99% to save the 1% in this case.
     // "no-catch-shadow": "off",
 
-    // Even though it doesn't do anything, there's no reason to ask the user to
-    // remove it. Properties get changed to variables relatively infrequently
-    // otherwise I could see the argument for this being a refactor leftover
-    // canary. But since it's not, it'd just be adding pointless noise to the
-    // user's workflow.
-    // "no-delete-var": "off",
+    // This is a SyntaxError in strict mode.
+    "no-delete-var": "error",
 
     // Subjective bad practice. Don't get in the user's way
     // "no-label-var": "off",
@@ -772,8 +768,8 @@ module.exports = {
     // Stylistic preference
     // "arrow-spacing": "off",
 
-    // Subjective best practice
-    // "constructor-super": "off",
+    // This flags a few cases that become errors at runtime.
+    "constructor-super": "error",
 
     // Stylistic preference
     // "generator-star-spacing": "off",
