@@ -46,10 +46,12 @@ module.exports = {
     // staying out of the developer's way.
     // "flowtype/no-primitive-constructor-types": "off",
 
-    // Some people have @flow implicitly enabled in their flowconfig, so I'm not
-    // going to enforce this rule (which disallows types in files without a
-    // @flow comment).
-    // "flowtype/no-types-missing-file-annotation": "off",
+    // Even though some people could enable flow in every js file in their
+    // project (without requiring the at-flow comment), this is pretty uncommon,
+    // and it can be frustrating to try to debug why your types aren't flagging
+    // incorrect code when you forgot to put an at-flow comment. So I'm going to
+    // turn this one on as a warn, since it helps the user.
+    "flowtype/no-types-missing-file-annotation": "warn",
 
     // Same config here as no-unused-expressions; this rule works the same way
     // but does not flag typecast expressions.
