@@ -51,7 +51,8 @@ module.exports = {
     // @flow comment).
     // "flowtype/no-types-missing-file-annotation": "off",
 
-    // Same config here as no-unused-expressions.
+    // Same config here as no-unused-expressions; this rule works the same way
+    // but does not flag typecast expressions.
     "flowtype/no-unused-expressions": [
       "warn",
       {
@@ -63,6 +64,9 @@ module.exports = {
         allowTaggedTemplates: true
       }
     ],
+    // We want to also turn off no-unused-expressions since the flowtype
+    // version is the same.
+    "no-unused-expressions": "off",
 
     // This is a nice rule to have in strictly typed codebases, but is too
     // strict to recommend for general use.

@@ -1,3 +1,10 @@
+/* eslint-config
+{
+ "extends": ["../index.js"],
+ "env": { "node": true }
+}
+*/
+
 // Test: for-direction
 // Expect error:for-direction
 for (let i = 0; i > 10; i++) {
@@ -32,7 +39,6 @@ if (cond = assign) {
   console.log(cond);
 }
 
-let cond, assign;
 if ((cond = assign)) { // okay with parens
   console.log(cond);
 }
@@ -454,7 +460,7 @@ while (shouldContinue) {
 
 // Test: no-unused-expressions
 var fortyTwo = 42;
-// Expect warn:no-unused-expressions, warn:flowtype/no-unused-expressions
+// Expect warn:no-unused-expressions
 fortyTwo;
 // allowShortCircuit option
 fortyTwo && console.log("yup 42 is truthy");
@@ -517,11 +523,11 @@ function timeToLoop() {
 // Skipped: wrap-iife
 
 // Test: yoda
-const fortyTwo = 42;
+const fortyThree = 43;
 
-if (42 === fortyTwo) {
+if (43 === fortyThree) {
   console.log("yoda is okay");
-} else if (fortyTwo === 42) {
+} else if (fortyThree === 43) {
   console.log("not yoda is okay too");
 }
 
@@ -763,10 +769,10 @@ class HasDupes {
 }
 
 // Test: no-duplicate-imports
-// Expect warn:no-unused-vars, error:import/no-unresolved
+// Expect warn:no-unused-vars
 import runtimeStuff from "./nowhere";
-// Expect warn:no-unused-vars, error:import/no-unresolved
-import type { SomeType } from "./nowhere";
+// Expect warn:no-unused-vars
+import { SomeType } from "./nowhere";
 
 // Test: no-new-symbol
 /* global Symbol */
@@ -797,7 +803,7 @@ class Pointless extends Something {
 }
 
 // Test: no-useless-rename
-// Expect warn:no-unused-vars, error:import/no-unresolved
+// Expect warn:no-unused-vars
 import { uselessRename as uselessRename } from "./nowhere";
 
 // Test: no-var

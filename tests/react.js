@@ -1,4 +1,10 @@
-// Expect warn:import/no-extraneous-dependencies, error:import/no-unresolved
+/* eslint-config
+{
+ "extends": ["../index.js", "../react.js"],
+ "env": { "node": true }
+}
+*/
+
 import React from "react";
 
 const Foo = () => <div />;

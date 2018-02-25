@@ -1,3 +1,10 @@
+/* eslint-config
+{
+ "extends": ["../index.js", "../import.js"],
+ "env": { "node": true }
+}
+*/
+
 // Expect warn:import/no-extraneous-dependencies, error:import/no-unresolved
 import React from "react";
 

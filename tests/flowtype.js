@@ -1,3 +1,10 @@
+/* eslint-config
+{
+ "extends": ["../index.js", "../flowtype.js"],
+ "env": { "node": true }
+}
+*/
+
 // Expect warn:flowtype/require-valid-file-annotation
 // @floww
 
@@ -7,3 +14,6 @@ type Foo = number;
 type Bar = string;
 
 module.exports = ("5": Bar);
+
+// Expect warn:flowtype/no-unused-expressions
+5;
