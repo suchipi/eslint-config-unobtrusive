@@ -77,7 +77,7 @@ module.exports = {
 
     // The user might prefer webpack loader syntax; trust that they know what
     // they are doing.
-    // "import/no-wepbpack-loader-syntax": "off",
+    // "import/no-webpack-loader-syntax": "off",
 
     // ----------------
     // Helpful warnings
