@@ -108,7 +108,7 @@ module.exports = {
     // warn if they import a package that isn't listed in their package.json.
     // Note that if there's no package.json in the project, this rule won't flag
     // anything. If that wasn't the case, I would disable this rule to be safe.
-    "import/no-extraneous-dependencies": "warn",
+    "import/no-extraneous-dependencies": "warn"
 
     // This is a matter of preference and/or a subjective best practice. It
     // makes sense to worry about in environments that don't properly support
@@ -168,48 +168,48 @@ module.exports = {
     // --------
     // Settings
     // --------
+  },
 
-    settings: {
-      // This defaults to .js only, but we want .jsx to work out of the box in
-      // case the user is using the .jsx extension. Having this here doesn't
-      // hurt anything for users who don't use the .jsx extension.
-      "import/extensions": [".js", ".jsx"],
+  settings: {
+    // This defaults to .js only, but we want .jsx to work out of the box in
+    // case the user is using the .jsx extension. Having this here doesn't
+    // hurt anything for users who don't use the .jsx extension.
+    "import/extensions": [".js", ".jsx"],
 
-      // We don't know enough about the user's code to set useful defaults here.
-      // This is commented out because it's the default value.
-      // "import/ignore": [],
+    // We don't know enough about the user's code to set useful defaults here.
+    // This is commented out because it's the default value.
+    // "import/ignore": [],
 
-      // In case the user is targeting electron, we don't want to make a
-      // false positive and say that this builtin can't be resolved. This could
-      // technically result in a false negative in non-electron environments,
-      // but it's unlikely that a user would try to import electron in those
-      // environments, and it's better to stay out of the user's way than cause
-      // a false positive.
-      "import/core-modules": ["electron"],
+    // In case the user is targeting electron, we don't want to make a
+    // false positive and say that this builtin can't be resolved. This could
+    // technically result in a false negative in non-electron environments,
+    // but it's unlikely that a user would try to import electron in those
+    // environments, and it's better to stay out of the user's way than cause
+    // a false positive.
+    "import/core-modules": ["electron"],
 
-      // Since it's almost unheard of for users to name a folder
-      // "jspm_packages" or "bower_components" when it does *not* contain
-      // modules installed by jspm or bower (since those are the default
-      // install directory names for those tools), err on the side of avoiding a
-      // false positive for jspm and bower users at the low risk of a false
-      // negative for non-jspm/bower users.
-      "import/external-module-folders": [
-        "node_modules", // This is included by default
-        "jspm_packages",
-        "bower_components"
-      ]
+    // Since it's almost unheard of for users to name a folder
+    // "jspm_packages" or "bower_components" when it does *not* contain
+    // modules installed by jspm or bower (since those are the default
+    // install directory names for those tools), err on the side of avoiding a
+    // false positive for jspm and bower users at the low risk of a false
+    // negative for non-jspm/bower users.
+    "import/external-module-folders": [
+      "node_modules", // This is included by default
+      "jspm_packages",
+      "bower_components"
+    ]
 
-      // Since we don't know about the user's environment, there's not really
-      // anything to add here. TODO: If a Typescript config is added, it should
-      // override this to `{ "typescript-eslint-parser": [".ts", ".tsx"] }`.
-      // "import/parsers": {},
+    // Since we don't know about the user's environment, there's not really
+    // anything to add here. TODO: If a Typescript config is added, it should
+    // override this to `{ "typescript-eslint-parser": [".ts", ".tsx"] }`.
+    // "import/parsers": {},
 
-      // Assume node resolution algorithm (default behavior). This is correct
-      // 99% of the time, and that's good enough for an extra add-on config.
-      // "import/resolver": undefined,
+    // Assume node resolution algorithm (default behavior). This is correct
+    // 99% of the time, and that's good enough for an extra add-on config.
+    // "import/resolver": undefined,
 
-      // There's no reason to tweak this for a general-purpose ESLint config.
-      // "import/cache": undefined,
-    }
+    // There's no reason to tweak this for a general-purpose ESLint config.
+    // "import/cache": undefined,
   }
 };
