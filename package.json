@@ -1,10 +1,10 @@
 {
   "name": "eslint-config-unobtrusive",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "ESLint config that only helps you, and otherwise stays out of your way",
   "main": "index.js",
   "repository": "https://github.com/suchipi/eslint-config-unobtrusive",
-  "author": "Suchipi Izumi <me@suchipi.com>",
+  "author": "Lily Scott <me@suchipi.com>",
   "license": "MIT",
   "private": false,
   "peerDependencies": {
