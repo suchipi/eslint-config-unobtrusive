@@ -42,8 +42,8 @@ module.exports = {
         // flag it for the user. It's unfortunate that we can't make this
         // particular case use the "warn" severity instead of the "error"
         // severity.
-        caseSensitive: true
-      }
+        caseSensitive: true,
+      },
     ],
 
     // It is an error to import a named export from a module that does not have
@@ -108,7 +108,7 @@ module.exports = {
     // warn if they import a package that isn't listed in their package.json.
     // Note that if there's no package.json in the project, this rule won't flag
     // anything. If that wasn't the case, I would disable this rule to be safe.
-    "import/no-extraneous-dependencies": "warn"
+    "import/no-extraneous-dependencies": "warn",
 
     // This is a matter of preference and/or a subjective best practice. It
     // makes sense to worry about in environments that don't properly support
@@ -197,8 +197,8 @@ module.exports = {
     "import/external-module-folders": [
       "node_modules", // This is included by default
       "jspm_packages",
-      "bower_components"
-    ]
+      "bower_components",
+    ],
 
     // Since we don't know about the user's environment, there's not really
     // anything to add here. TODO: If a Typescript config is added, it should
@@ -207,9 +207,14 @@ module.exports = {
 
     // Assume node resolution algorithm (default behavior). This is correct
     // 99% of the time, and that's good enough for an extra add-on config.
-    // "import/resolver": undefined,
+    "import/resolver": {
+      node: {
+        // These extensions are here for the same reason as "import/extensions"
+        extensions: [".js", ".jsx"],
+      },
+    },
 
     // There's no reason to tweak this for a general-purpose ESLint config.
     // "import/cache": undefined,
-  }
+  },
 };
