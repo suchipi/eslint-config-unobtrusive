@@ -1,10 +1,15 @@
 module.exports = {
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
-    }
+      jsx: true,
+    },
   },
   plugins: ["react"],
+  settings: {
+    react: {
+      version: "detect",
+    },
+  },
   rules: {
     // The rules in this file are listed in the same order as on
     // http://npm.im/eslint-plugin-react (at time of writing).
@@ -323,9 +328,9 @@ module.exports = {
     // This marks composite component variables as used when they are referenced
     // in a JSX element. This prevents no-unused-vars from marking those
     // variables as unused as a false positive.
-    "react/jsx-uses-vars": "warn"
+    "react/jsx-uses-vars": "warn",
 
     // Formatting/style rule
     // "react/jsx-wrap-multilines": "off",
-  }
+  },
 };
