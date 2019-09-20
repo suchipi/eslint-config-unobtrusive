@@ -18,3 +18,6 @@ notThere();
 import noDefault from "../fixtures/hasNamedESExport";
 
 noDefault();
+
+// Resolves jsx extension correctly
+import "../fixtures/jsxFile";
