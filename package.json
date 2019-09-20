@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-unobtrusive",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "ESLint config that only helps you, and otherwise stays out of your way",
   "main": "index.js",
   "repository": "https://github.com/suchipi/eslint-config-unobtrusive",
