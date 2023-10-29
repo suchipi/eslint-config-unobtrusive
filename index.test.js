@@ -32,8 +32,8 @@ try {
         "optionalCatchBinding",
         "throwExpressions",
         "pipelineOperator",
-        "nullishCoalescingOperator"
-      ]
+        "nullishCoalescingOperator",
+      ],
     });
   };
 
@@ -45,10 +45,10 @@ try {
   // Expect warn:no-unused-expressions, error:no-undef
   somethingElse;
   */
-  const parseComment = value => {
+  const parseComment = (value) => {
     const matches = value.match(/^ Expect ([:\w-/, ]+)/i);
     if (matches) {
-      return matches[1].split(",").map(str => {
+      return matches[1].split(",").map((str) => {
         const [severity, ruleId] = str.trim().split(":");
         return { severity, ruleId };
       });
@@ -61,17 +61,17 @@ try {
     warn: 1,
     error: 2,
     1: "warn",
-    2: "error"
+    2: "error",
   };
 
   const files = fs.readdirSync(path.resolve(__dirname, "tests"));
-  files.forEach(filename => {
+  files.forEach((filename) => {
     if (filename === ".eslintrc.json") {
       return;
     }
     const content = fs.readFileSync(
       path.resolve(__dirname, "tests", filename),
-      "utf-8"
+      "utf-8",
     );
     const ast = getAst(content);
     const firstComment = ast.comments[0];
@@ -82,12 +82,12 @@ try {
     const configJSON = lines.slice(1).join("\n");
     fs.writeFileSync(
       path.resolve(__dirname, "tests", ".eslintrc.json"),
-      configJSON
+      configJSON,
     );
 
     const cli = new CLIEngine({
       configFile: path.resolve(__dirname, "tests", ".eslintrc.json"),
-      useEslintrc: false
+      useEslintrc: false,
     });
     const report = cli.executeOnFiles([path.join("tests", filename)]);
     const file = report.results[0];
@@ -96,25 +96,26 @@ try {
       const ast = getAst(file.source, file.filePath);
 
       it("contains all expected messages", () => {
-        ast.comments.forEach(comment => {
+        ast.comments.forEach((comment) => {
           const expectedRules = parseComment(comment.value);
 
           if (expectedRules.length > 0) {
             expectedRules.forEach(({ severity, ruleId }) => {
               const messagesOnLine = file.messages.filter(
-                message => message.line === comment.loc.start.line + 1
+                (message) => message.line === comment.loc.start.line + 1,
               );
               const expectedMessage = messagesOnLine.find(
-                message => message.ruleId === ruleId
+                (message) => message.ruleId === ruleId,
               );
 
               if (expectedMessage == null) {
-                let errorMessage = `Expected one or more ${ruleId} on line ${comment
-                  .loc.start.line + 1}, but none were present.`;
+                let errorMessage = `Expected one or more ${ruleId} on line ${
+                  comment.loc.start.line + 1
+                }, but none were present.`;
 
                 if (messagesOnLine.length > 0) {
                   errorMessage += ` Instead, the following messages were present: ${messagesOnLine
-                    .map(m => m.ruleId)
+                    .map((m) => m.ruleId)
                     .join(", ")}.`;
                 } else {
                   errorMessage += " Instead, there were no messages present.";
@@ -127,7 +128,7 @@ try {
                     `Expected the ${ruleId} on line ` +
                       `${comment.loc.start.line + 1} to be of severity ` +
                       `${severity}, but it was of severity ` +
-                      `${severities[expectedMessage.severity]}.`
+                      `${severities[expectedMessage.severity]}.`,
                   );
                 } else {
                   // All good
@@ -139,16 +140,16 @@ try {
       });
 
       it("contains no unexpected messages", () => {
-        file.messages.forEach(message => {
+        file.messages.forEach((message) => {
           const comment = ast.comments.find(
-            comment => comment.loc.start.line === message.line - 1
+            (comment) => comment.loc.start.line === message.line - 1,
           );
 
-          const failMessage = message => {
+          const failMessage = (message) => {
             throw new Error(
               `Unexpected ${message.ruleId} (${
                 severities[message.severity]
-              }) ` + `at line ${message.line}, column ${message.column}.`
+              }) ` + `at line ${message.line}, column ${message.column}.`,
             );
           };
 

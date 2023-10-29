@@ -1,7 +1,7 @@
 module.exports = {
   // We need to use babel-eslint, because eslint's built-in parser can't parse
   // flow types.
-  parser: "babel-eslint",
+  parser: "@babel/eslint-parser",
   plugins: ["flowtype"],
   rules: {
     // The rules in this file are listed in the same order as on
@@ -63,8 +63,8 @@ module.exports = {
         // Allow eg. optionConfigured ? doIt() : null;
         allowTernary: true,
         // Allow eg. taggedTemplateStringFunctionWithSideEffects`yup`;
-        allowTaggedTemplates: true
-      }
+        allowTaggedTemplates: true,
+      },
     ],
     // We want to also turn off no-unused-expressions since the flowtype
     // version is the same.
@@ -94,8 +94,8 @@ module.exports = {
       "warn",
       "never", // Don't report files that are missing a @flow comment
       {
-        annotationStyle: "none" // Accept either `/* @flow */` or `// @flow`
-      }
+        annotationStyle: "none", // Accept either `/* @flow */` or `// @flow`
+      },
     ],
 
     // Subjective best practice/too strict.
@@ -125,6 +125,6 @@ module.exports = {
     // Marks type alias declarations as used for no-unused-vars. As far as I
     // can tell, it doesn't matter if you use "warn" or "error" for this rule,
     // because it only affects the behavior of no-unused-vars.
-    "flowtype/use-flow-type": "warn"
-  }
+    "flowtype/use-flow-type": "warn",
+  },
 };

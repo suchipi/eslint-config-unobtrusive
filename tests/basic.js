@@ -15,7 +15,7 @@ for (let i = 0; i > 10; i++) {
 // Expect warn:no-unused-vars
 const somethingWithAGetter = {
   // Expect warn:getter-return
-  get foo() {}
+  get foo() {},
 };
 
 // Test: no-await-in-loop
@@ -35,11 +35,12 @@ if (something === -0) {
 // Test: no-cond-assign
 let cond, assign;
 // Expect warn:no-cond-assign
-if (cond = assign) {
+if ((cond = assign)) {
   console.log(cond);
 }
 
-if ((cond = assign)) { // okay with parens
+if ((cond = assign)) {
+  // okay with parens
   console.log(cond);
 }
 
@@ -66,20 +67,23 @@ debugger;
 const someObjectWithDupeKeys = {
   dupeKey: true,
   // Expect warn:no-dupe-keys
-  dupeKey: false
+  dupeKey: false,
 };
 
 // Test: no-duplicate-case
 // Expect error:no-undef
 switch (somethingVeryCool) {
-  case 1: console.log(1);
+  case 1:
+    console.log(1);
   // Expect warn:no-duplicate-case
-  case 1: console.log("1 again");
+  case 1:
+    console.log("1 again");
 }
 
 // Test: no-empty
 // Expect warn:no-empty
-{}
+{
+}
 
 // Test: no-empty-character-class
 // Expect warn:no-unused-vars, warn:no-empty-character-class
@@ -87,7 +91,8 @@ const emptyCharacterClass = /a[]/g;
 
 // Test: no-ex-assign
 // Expect warn:no-empty
-try {} catch(err) {
+try {
+} catch (err) {
   err = 5;
 }
 
@@ -101,7 +106,9 @@ if (Boolean(5)) {
 
 // Test: no-func-assign
 // Expect warn:no-unused-vars
-function funcAssign() { console.log("funcAssign"); }
+function funcAssign() {
+  console.log("funcAssign");
+}
 funcAssign = 5;
 
 // Test: no-inner-declarations
@@ -115,8 +122,6 @@ if (true) {
 
 // Test: no-irregular-whitespace
 // There is a non-breaking space on the line below. It should be preserved.
- 
-
 // Test: no-obj-calls
 // Expect error:no-obj-calls
 Math();
@@ -138,7 +143,7 @@ const thisIsGoodToo = /foo   bar/;
 console.log(thisIsGood, thisIsGoodToo);
 
 // Test: no-sparse-arrays
-const sparseArray = [,,,];
+const sparseArray = [, , ,];
 console.log(sparseArray);
 
 // Test: no-template-curly-in-string
@@ -147,23 +152,22 @@ console.log(templateInString);
 
 // Test: no-unexpected-multiline
 // Expect error:no-undef
-weirdAsi
-[1].forEach();
+weirdAsi[1].forEach();
 
 // Test: no-unreachable
-(function() {
+(function () {
   return 3;
   // Expect warn:no-unreachable
   return 4;
 })();
 
 // Test: no-unsafe-finally
-(function() {
+(function () {
   try {
     // Expect error:no-undef
     maybeDie();
     return 3;
-  } catch(err) {
+  } catch (err) {
     // nothing
   } finally {
     return 5;
@@ -180,7 +184,7 @@ if (!key in object) {
 console.log(NaN === NaN);
 
 // Test: valid-jsdoc
-console.log(/**number*/ n => n * 2);
+console.log(/**number*/ (n) => n * 2);
 
 // Test: valid-typeof
 // Expect warn:valid-typeof
@@ -191,7 +195,7 @@ console.log(typeof 4 === sometype);
 
 // Test: accessor-pairs
 console.log({
-  set foo(val) {}
+  set foo(val) {},
 });
 
 // Test: array-callback-return
@@ -202,7 +206,7 @@ console.log(
 );
 
 // Test: block-scoped-var
-(function() {
+(function () {
   if (foo) {
     var bla = true;
   }
@@ -231,8 +235,8 @@ function maybeReturnsUndefined() {
 // Skipped: curly
 
 // Test: default-case
-switch(4) {
-  case (4): {
+switch (4) {
+  case 4: {
     console.log(4);
   }
 
@@ -257,7 +261,7 @@ confirm("Are you sure about that");
 prompt("Process completed");
 
 // Test: no-caller
-(function() {
+(function () {
   "use strict";
   // Expect error:no-caller
   return arguments.caller;
@@ -282,9 +286,9 @@ console.log(/=foo/);
 function foo() {
   const someBool = true;
   if (someBool) {
-      return 4;
+    return 4;
   } else {
-      return 5;
+    return 5;
   }
 }
 
@@ -306,9 +310,11 @@ eval("console.log('hi');");
 Object.prototype.isAwesome = () => "maybe";
 
 // Test: no-extra-bind
-console.log((function() {
-  return 5;
-}).bind({ foo: 4 }));
+console.log(
+  function () {
+    return 5;
+  }.bind({ foo: 4 }),
+);
 
 // Test: no-extra-label
 A: while (false) {
@@ -318,9 +324,9 @@ A: while (false) {
 
 // Test: no-fallthrough
 switch (5) {
-  case (1):
-  case (2):
-  case (3): {
+  case 1:
+  case 2:
+  case 3: {
     console.log("fall-through");
   }
 }
@@ -349,11 +355,11 @@ function gimmeAThis() {
 }
 
 // Test: no-iterator
-const IteratorThing = function() {};
-IteratorThing.prototype.__iterator__ = function() {
+const IteratorThing = function () {};
+IteratorThing.prototype.__iterator__ = function () {
   // Expect error:no-undef
   return new Iterator(this);
-}
+};
 
 // Test: no-labels
 label: {
@@ -368,13 +374,13 @@ label: {
 // Test: no-loop-func
 const funcs = {};
 for (var i = 0; i < 10; i++) {
-  funcs[i] = function() {
-      return i;
+  funcs[i] = function () {
+    return i;
   };
 }
 
 // Test: no-magic-numbers
-var data = ['foo', 'bar', 'baz'];
+var data = ["foo", "bar", "baz"];
 console.log(data[2]);
 
 // Skipped: no-muli-spaces
@@ -385,26 +391,22 @@ console.log(data[2]);
 new Thing();
 
 // Test: no-new-func
-(new Function("console.log('hi');"))();
+new Function("console.log('hi');")();
 
 // Test: no-new-wrappers
-console.log(
-  new String("a"),
-  new Boolean(false),
-  new Number(33)
-);
+console.log(new String("a"), new Boolean(false), new Number(33));
 
 // Skipped: no-octal (SyntaxError)
 // Skipped: no-octal-escape (SyntaxError)
 
 // Test: no-param-reassign
-(function(bar) {
+(function (bar) {
   bar = 4;
 })();
 
 // Test: no-proto
 const protoman = {};
-protoman.__proto__ = function() {};
+protoman.__proto__ = function () {};
 
 // Test: no-redeclare
 // Expect warn:no-unused-vars
@@ -414,12 +416,12 @@ var redeclared = 10;
 // Skipped: no-restricted-properties
 
 // Test: no-return-assign
-(function() {
-  return this.woo = 3;
+(function () {
+  return (this.woo = 3);
 })();
 
 // Test: no-return-await
-(async function() {
+(async function () {
   /* global Promise */
   return await Promise.resolve(3);
 })();
@@ -429,7 +431,7 @@ var redeclared = 10;
 location.href = "javascript:void(0)";
 
 // Test: no-self-assign
-(function() {
+(function () {
   // Expect warn:no-unused-vars
   var foo;
   // Expect warn:no-self-assign
@@ -442,12 +444,10 @@ location.href = "javascript:void(0)";
 })(NaN);
 
 // Test: no-sequences
-console.log(
-  (() => console.log("ran"), 5)
-);
+console.log((() => console.log("ran"), 5));
 
 // Test: no-throw-literal
-(function() {
+(function () {
   throw 42;
 })();
 
@@ -476,7 +476,9 @@ something: {
 }
 
 // Test: no-useless-call
-function callMeMaybe() { return this; }
+function callMeMaybe() {
+  return this;
+}
 callMeMaybe.call(undefined, 1, 2, 3);
 callMeMaybe.apply(undefined, [1, 2, 3]);
 callMeMaybe.call(null, 1, 2, 3);
@@ -489,7 +491,7 @@ console.log("a" + "b");
 console.log(/\a\b\c\d\e/);
 
 // Test: no-useless-return
-(function() {
+(function () {
   return;
 })();
 
@@ -517,7 +519,9 @@ async function doSomething() {
 // Test: vars-on-top
 // Expect warn:no-unused-vars
 function timeToLoop() {
-  for (var i=0; i<10; i++) { /* empty */ }
+  for (var i = 0; i < 10; i++) {
+    /* empty */
+  }
 }
 
 // Skipped: wrap-iife
@@ -545,7 +549,7 @@ console.log(assignedAtDeclaration, assignedLater);
 var err;
 try {
   // something
-} catch(err) {
+} catch (err) {
   // overwrites err in IE8 instead of shadowing
 }
 
@@ -564,7 +568,7 @@ notACollision: {
 // Test: no-shadow
 // Expect warn:no-unused-vars
 var shadowThis = 3;
-(function() {
+(function () {
   // Expect warn:no-unused-vars
   var shadowThis = 10;
 })();
@@ -591,7 +595,7 @@ var beforeDefined = 42;
 // Test: no-callback-return
 function processRequest(err, callback) {
   if (err) {
-      callback(err);
+    callback(err);
   }
   callback();
 }
@@ -724,23 +728,23 @@ fs.existsSync("foo");
 // Expect warn:no-unused-vars
 class SuperInUnderived {
   constructor() {
-      // Expect error:constructor-super
-      super();  // SyntaxError
+    // Expect error:constructor-super
+    super(); // SyntaxError
   }
 }
 
 // Expect warn:no-unused-vars, error:no-undef
 class DerivedWithoutSuper extends Parent {
   // Expect error:constructor-super
-  constructor() { }  // ReferenceError
+  constructor() {} // ReferenceError
 }
 
 // Expect warn:no-unused-vars
 class ExtendsNonClass extends null {
   // Expect warn:no-useless-constructor
   constructor() {
-      // Expect error:constructor-super
-      super();  // TypeError
+    // Expect error:constructor-super
+    super(); // TypeError
   }
 }
 

@@ -2,7 +2,7 @@ module.exports = {
   // Assume the user is using ES modules, so we're always in a module context.
   parserOptions: {
     sourceType: "module",
-    ecmaVersion: 2017
+    ecmaVersion: 2017,
   },
 
   rules: {
@@ -73,7 +73,7 @@ module.exports = {
 
     // This rule disallows using the same name for function parameters. This is
     // an error in strict mode, which we assume you are in since you're using
-    // modules. 
+    // modules.
     "no-dupe-args": "error",
 
     // If you have duplicate object keys in your application, the last one in
@@ -468,8 +468,8 @@ module.exports = {
         // Allow eg. optionConfigured ? doIt() : null;
         allowTernary: true,
         // Allow eg. taggedTemplateStringFunctionWithSideEffects`yup`;
-        allowTaggedTemplates: true
-      }
+        allowTaggedTemplates: true,
+      },
     ],
 
     // Points out unused or leftover code from refactoring; helpful.
@@ -812,7 +812,7 @@ module.exports = {
     // This rule usually pops up when you had something in the constructor, but
     // then you removed it, and now the constructor isn't doing anything, so you
     // could remove it. So it pops up in refactoring a lot, so it's useful.
-    "no-useless-constructor": "warn"
+    "no-useless-constructor": "warn",
 
     // You can't really do this on accident, so if the user chooses to do that,
     // no reason to yell at them...
@@ -863,5 +863,5 @@ module.exports = {
 
     // Stylistic preference
     // "yield-star-spacing": "off"
-  }
+  },
 };
