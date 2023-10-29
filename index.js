@@ -1,8 +1,9 @@
 module.exports = {
-  // Assume the user is using ES modules, so we're always in a module context.
+  parser: "@babel/eslint-parser",
   parserOptions: {
+    // Assume the user is using ES modules, so we're always in a module context.
     sourceType: "module",
-    ecmaVersion: 2017,
+    ecmaVersion: 2022,
   },
 
   rules: {

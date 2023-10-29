@@ -1,7 +1,4 @@
 module.exports = {
-  // We need to use babel-eslint, because eslint's built-in parser can't parse
-  // flow types.
-  parser: "@babel/eslint-parser",
   plugins: ["flowtype"],
   rules: {
     // The rules in this file are listed in the same order as on
