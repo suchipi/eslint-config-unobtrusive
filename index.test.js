@@ -1,7 +1,7 @@
 const fs = require("fs");
 const { CLIEngine } = require("eslint");
 const path = require("path");
-const { parse } = require("babylon");
+const { parse } = require("@babel/parser");
 
 try {
   const getAst = (source = "", filename) => {
@@ -16,7 +16,7 @@ try {
         "flow",
         "doExpressions",
         "objectRestSpread",
-        "decorators2",
+        "decorators-legacy",
         "classProperties",
         "classPrivateProperties",
         "classPrivateMethods",
@@ -31,7 +31,7 @@ try {
         "bigInt",
         "optionalCatchBinding",
         "throwExpressions",
-        "pipelineOperator",
+        ["pipelineOperator", { proposal: "hack", topicToken: "^^" }],
         "nullishCoalescingOperator",
       ],
     });
