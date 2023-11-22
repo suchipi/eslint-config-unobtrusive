@@ -4,6 +4,7 @@ module.exports = {
     // Assume the user is using ES modules, so we're always in a module context.
     sourceType: "module",
     ecmaVersion: 2022,
+    requireConfigFile: false,
   },
 
   rules: {
